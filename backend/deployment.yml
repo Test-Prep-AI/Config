@@ -24,6 +24,8 @@ spec:
               cpu: 1200m
               memory: 1024Mi
           image: ghcr.io/test-prep-ai/backend:1.0.0
+          imagePullSecrets:
+            - name: ghcr-secret
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
