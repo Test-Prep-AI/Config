@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          resources:
+            requests:
+              cpu: 400m
+              memory: 256Mi
+            limits:
+              cpu: 700m
+              memory: 512Mi
+          image: ghcr.io/test-prep-ai/frontend:1.0.0
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 5"]
+          ports:
+            - containerPort: 3000
