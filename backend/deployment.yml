@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels:
+    app: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          resources:
+            requests:
+              cpu: 800m
+              memory: 512Mi
+            limits:
+              cpu: 1200m
+              memory: 1024Mi
+          image: ghcr.io/test-prep-ai/backend:1.0.0
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 5"]
+          ports:
+            - containerPort: 8080
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
