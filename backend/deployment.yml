@@ -15,7 +15,7 @@ spec:
         app: backend
     spec:
       imagePullSecrets:
-            - name: ghcr-secret
+        - name: ghcr-secret
       containers:
         - name: backend
           resources:
@@ -49,22 +49,22 @@ spec:
                 secretKeyRef:
                   name: backend-secret
                   key: RDS_PASSWORD
-            - JWT_SECRET:
+            - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: backend-secret
                   key: JWT_SECRET
-            - AWS_ACCESS_KEY:
+            - name: AWS_ACCESS_KEY
               valueFrom:
                 secretKeyRef:
                   name: backend-secret
                   key: AWS_ACCESS_KEY
-            - AWS_SECRET_KEY:
+            - name: AWS_SECRET_KEY
               valueFrom:
                 secretKeyRef:
                   name: backend-secret
                   key: AWS_SECRET_KEY
-            - S3_BUCKET_NAME:
+            - name: S3_BUCKET_NAME
               valueFrom:
                 secretKeyRef:
                   name: backend-secret
