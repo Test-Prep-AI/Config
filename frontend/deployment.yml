@@ -15,7 +15,7 @@ spec:
         app: frontend
     spec:
       imagePullSecrets:
-            - name: ghcr-secret
+        - name: ghcr-secret
       containers:
         - name: frontend
           resources:
@@ -23,13 +23,13 @@ spec:
               cpu: 400m
               memory: 256Mi
             limits:
-              cpu: 700m
+              cpu: 1000m
               memory: 512Mi
-          image: ghcr.io/test-prep-ai/frontend:1.0.0
+          image: ghcr.io/test-prep-ai/frontend:1.0.2
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop:
               exec:
                 command: ["/bin/sh", "-c", "sleep 5"]
           ports:
-            - containerPort: 3000
+            - containerPort: 80
