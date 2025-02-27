@@ -9,6 +9,10 @@ metadata:
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:488157851585:certificate/9b097851-7f8c-4593-a7ae-7f1b3d465bdc
+    alb.ingress.kubernetes.io/actions.backend-login: >
+      {"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"backend","servicePort":80,"serviceNamespace":"backend"}]}}
+    alb.ingress.kubernetes.io/actions.backend-api: >
+      {"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"backend","servicePort":80,"serviceNamespace":"backend"}]}}
 spec:
   rules:
     - http:
@@ -17,16 +21,23 @@ spec:
             pathType: Exact
             backend:
               service:
-                name: backend
+                name: backend-login
                 port:
-                  number: 80
+                  name: use-annotation
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-login
+                port:
+                  name: use-annotation
           - path: /api
             pathType: Prefix
             backend:
               service:
-                name: backend
+                name: backend-api
                 port:
-                  number: 80
+                  name: use-annotation
           - path: /
             pathType: Prefix
             backend:
