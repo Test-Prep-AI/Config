@@ -34,3 +34,24 @@ spec:
                 name: backend
                 port:
                   number: 80
+          - path: /problems
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
+          - path: /questions
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
