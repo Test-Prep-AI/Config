@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: testprep
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Test-Prep-AI/Config.git
+    targetRevision: HEAD
+    path: /testprep
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: testprep
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
