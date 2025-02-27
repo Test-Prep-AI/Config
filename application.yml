@@ -40,24 +40,24 @@ spec:
     automated:
       selfHeal: true
       prune: true
-# ---
-# apiVersion: argoproj.io/v1alpha1
-# kind: Application
-# metadata:
-# name: ai-argo-application
-# namespace: argocd
-# spec:
-# project: default
-# source:
-# repoURL: https://github.com/Test-Prep-AI/Config
-# targetRevision: HEAD
-# path: model
-# destination:
-# server: https://kubernetes.default.svc
-# namespace: model
-# syncPolicy:
-# syncOptions:
-# - CreateNamespace=true
-# automated:
-# selfHeal: true
-# prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ai-argo-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Test-Prep-AI/Config
+    targetRevision: HEAD
+    path: model
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: model
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
