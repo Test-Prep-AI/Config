@@ -27,7 +27,7 @@ spec:
               cpu: 2500m
               memory: 4048Mi
 
-          image: ghcr.io/test-prep-ai/model:1.0.1
+          image: ghcr.io/test-prep-ai/model:1.1.0
           imagePullSecrets:
             - name: ghcr-secret
           imagePullPolicy: IfNotPresent
