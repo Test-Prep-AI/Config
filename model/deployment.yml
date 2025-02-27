@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ai
+  namespace: model
   labels:
     app: ai
 spec:
@@ -23,8 +24,8 @@ spec:
               cpu: 1000m
               memory: 1024Mi
             limits:
-              cpu: 2000m
-              memory: 2048Mi
+              cpu: 2500m
+              memory: 4048Mi
 
           image: ghcr.io/test-prep-ai/model:1.0.1
           imagePullSecrets:
