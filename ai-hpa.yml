@@ -1,15 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend
-  namespace: frontend
+  name: ai
+  namespace: testprep
   labels:
-    app: frontend
+    app: ai
 spec:
   type: ClusterIP
   selector:
-    app: frontend
+    app: ai
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 80
+      targetPort: 8000
+      name: http
