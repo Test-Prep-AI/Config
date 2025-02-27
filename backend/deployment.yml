@@ -39,3 +39,33 @@ spec:
           env:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
+            - name: RDS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: RDS_USERNAME
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: RDS_PASSWORD
+            - JWT_SECRET:
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: JWT_SECRET
+            - AWS_ACCESS_KEY:
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: AWS_ACCESS_KEY
+            - AWS_SECRET_KEY:
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: AWS_SECRET_KEY
+            - S3_BUCKET_NAME:
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: S3_BUCKET_NAME
