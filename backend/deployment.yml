@@ -69,3 +69,8 @@ spec:
                 secretKeyRef:
                   name: backend-secret
                   key: S3_BUCKET_NAME
+            - name: SSL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: backend-secret
+                  key: SSL_PASSWORD
