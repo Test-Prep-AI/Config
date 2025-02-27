@@ -13,6 +13,20 @@ spec:
   rules:
     - http:
         paths:
+          - path: /login
+            pathType: Exact
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend
+                port:
+                  number: 80
           - path: /
             pathType: Prefix
             backend:
