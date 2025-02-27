@@ -1,0 +1,99 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai
+  labels:
+    app: ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai
+  template:
+    metadata:
+      labels:
+        app: ai
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: ai
+          resources:
+            requests:
+              cpu: 1000m
+              memory: 1024Mi
+            limits:
+              cpu: 2000m
+              memory: 2048Mi
+
+          image: ghcr.io/test-prep-ai/model:1.0.1
+          imagePullSecrets:
+            - name: ghcr-secret
+          imagePullPolicy: IfNotPresent
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 5"]
+          ports:
+            - containerPort: 8000
+          env:
+            - name: RDS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: RDS_USERNAME
+            - name: RDS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: RDS_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: JWT_SECRET
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: AWS_ACCESS_KEY
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: AWS_SECRET_KEY
+            - name: S3_BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: S3_BUCKET_NAME
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: OPENAI_API_KEY
+            - name: LANGCHAIN_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: LANGCHAIN_ENDPOINT
+            - name: LANGCHAIN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: LANGCHAIN_API_KEY
+            - name: LANGCHAIN_PROJECT
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: LANGCHAIN_PROJECT
+            - name: LANGSMITH_TRACING
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: LANGSMITH_TRACING
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: ai-secret
+                  key: AWS_REGION
